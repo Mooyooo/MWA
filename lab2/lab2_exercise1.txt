@@ -1,0 +1,20 @@
+1.Why do we want sometimes to use SetImmediate instead of using setTimeout?
+it checks I/O queue and if all I/O queue is processed then it works. 
+It mean in case we need to do something after I/O, we can use setImmeadiate.
+
+2. Explain the diffrence between process.nextTick nas setImmediate?
+process.nextTick is priority queue and it will be execute before the setImmeadiate in the check queue.
+
+3.Name 10 global modules available in Node environment?
+global.vm
+global.Math
+global.Object
+global.Date
+global.Set
+global.dns
+global.http
+global.fs
+global.v8
+global.assert
+
+
