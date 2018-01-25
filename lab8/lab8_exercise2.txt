@@ -1,0 +1,28 @@
+{
+        "_id" : ObjectId("5a666be99fa0aeecc224a7ed"),
+        "isbn" : "123asd",
+        "authors" : [
+                "Mo",
+                "Tsoodol"
+        ],
+        "tag" : [
+                "Web",
+                "Node",
+                "express"
+        ],
+        "borrowedStudents" : [
+                {
+                        "name" : "Muugii",
+                        "BDate" : ISODate("2018-01-21T06:00:00Z")
+                },
+                {
+                        "name" : "CJ",
+                        "BDate" : ISODate("2018-01-19T06:00:00Z")
+                }
+        ]
+}
+ db.library.createIndex(isbn:1)
+db.library.createIndex(authors:1)
+db.library.createIndex(tag:1)
+db.library.createIndex(borrowedStudents:1)
+
