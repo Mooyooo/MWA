@@ -1,0 +1,25 @@
+{
+        "_id" : "01007",
+        "city" : "BELCHERTOWN",
+        "loc" : [
+                -72.410953,
+                42.275103
+        ],
+        "pop" : 10579,
+        "state" : "MA"
+} 
+ 
+db.address.aggregate([ {$match:{state:"IA"}}, {$group:{_id:"$state",zicode:{$addToSet:"$_id"}}}   ])
+db.address.aggregate([  {$match:{pop:{$lt:10000}}}, {$project:{_id:"$city",zipcode:"$_id", population:"$pop"}}])
+db.address.aggregate([ {$group:{_id:"$city", numberOfzipCode:{$sum:1}}}, {$match:{numberOfzipCode:{$gt:1} }} ,{$sort:{_id:1}} ])
+
+db.address.aggregate([     
+    {$group:{_id:{city:"$city",state:"$state"}, numberOfzipCode:{$sum:1}}},      
+    {$match:{numberOfzipCode:{$gt:1} }} ,{$sort:{"_id.state":1,"_id.city":1}},      
+    {$project:{_id: 0, state:"$_id.state", city:"$_id.city", NumberOfzipCode:1}}  
+])
+
+ db.address.aggregate([ 
+     {$group:{_id:{state:"$state", city:"$city"}, population:{$sum:"$pop"} }}, 
+     {$group:{_id:"$_id.state", pop:{$min:"$population"}}}
+])
