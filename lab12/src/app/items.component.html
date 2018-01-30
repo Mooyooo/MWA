@@ -1,0 +1,6 @@
+
+
+<ul [myvisibility]="true">
+    <li *ngFor="let color of colors" upper mycolor (color)="changeColr($event)">{{color}}</li>
+</ul>
+selected color is {{color}}
