@@ -1,0 +1,70 @@
+import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+  FormArray
+} from "@angular/forms";
+import { UserService } from '../user.service';
+
+@Component({
+  selector: 'user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
+})
+export class UserComponent implements OnInit {
+  data: any;
+  postData: string = '';
+  myForm: FormGroup;
+  constructor(private fb: FormBuilder, private userService: UserService) {
+    this.myForm = fb.group({
+      'name': ['your name', [Validators.required]],
+      'email': ['molomjamts@gmail.com', [Validators.required, Validators.email]],
+      'postText': [Validators.required, this.valiDateLength]
+    });
+
+
+    // this.myForm.statusChanges.subscribe(
+    //   (data: any) => console.log(data)
+    // );
+  }
+
+  ngOnInit() {
+  }
+
+  onSubmit() {
+    console.log(this.myForm.value);
+  }
+
+  valiDateLength(control: FormControl) {
+    if (control.value.length < 10) {
+      return { 'length': true }
+    }
+    else {
+      return null;
+    }
+  }
+
+  getData() {
+
+    this.userService.getPost().subscribe(
+      res => {
+        res => res.json();
+        this.postData = res[0].title;
+      }
+    )
+    this.userService.getUserInfo().subscribe(res => {
+      res => res.json();
+      this.data = res;
+      // this.myForm.setValue({'name':this.data.name, 'email':this.data.email,'post':''});
+      this.myForm.setValue({ 'name': this.data.name, 'email': this.data.email, 'postText': this.postData });
+      // this.myForm.controls['email']=this.data.email;
+      console.log(this.data);
+      // console.log('postdata:'+this.postData);
+    });
+
+
+
+  }
+}
