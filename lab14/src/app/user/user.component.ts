@@ -7,6 +7,7 @@ import {
   FormArray
 } from "@angular/forms";
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user',
@@ -17,11 +18,11 @@ export class UserComponent implements OnInit {
   data: any;
   postData: string = '';
   myForm: FormGroup;
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router:Router ) {
     this.myForm = fb.group({
-      'name': ['your name', [Validators.required]],
-      'email': ['molomjamts@gmail.com', [Validators.required, Validators.email]],
-      'postText': [Validators.required, this.valiDateLength]
+      'name': ['', [Validators.required]],
+      'email': ['', [Validators.required, Validators.email]],
+      'postText': ['', [Validators.required, this.valiDateLength]]
     });
 
 
@@ -35,6 +36,9 @@ export class UserComponent implements OnInit {
 
   onSubmit() {
     console.log(this.myForm.value);
+   this.router.navigate(['/confirm']);
+    return false;
+    
   }
 
   valiDateLength(control: FormControl) {

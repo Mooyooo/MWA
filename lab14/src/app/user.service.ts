@@ -9,10 +9,10 @@ export class UserService {
   constructor(public http: HttpClient) {
   }
   getUserInfo() {
-    return this.http.get('http://jsonplaceholder.typicode.com/users/1');
+    return this.http.get('https://jsonplaceholder.typicode.com/users/1');
   }
   getPost() {
-    return this.http.get('http://jsonplaceholder.typicode.com/posts?userId=1');
+    return this.http.get('https://jsonplaceholder.typicode.com/posts?userId=1');
   }
 
 }

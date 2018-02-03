@@ -7,18 +7,23 @@ import { UserComponent } from './user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { UserService } from './user.service';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { Router } from '@angular/router';
+import { myRoutes } from './app.routes';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    myRoutes
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
